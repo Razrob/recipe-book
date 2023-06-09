@@ -24,6 +24,7 @@ public class RecipeListArea : MonoBehaviour
             return;
 
         IsActive = value;
+        gameObject.SetActive(value);
 
         if (IsActive)
             RefreshCells();
@@ -47,7 +48,6 @@ public class RecipeListArea : MonoBehaviour
             RecipeUICell recipeCell = RecipeViewElementsFactory.Instance.CreateRecipeUICell();
             recipeCell.transform.SetParent(_recipeCellsParent);
             recipeCell.OpenButton.onClick.AddListener(() => OnRecipeCellClick?.Invoke(recipeCell));
-
             _recipeCellsList.Add(recipeCell);
         }
 

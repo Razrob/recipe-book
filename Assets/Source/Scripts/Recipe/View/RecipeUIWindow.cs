@@ -13,7 +13,7 @@ public class RecipeUIWindow : MonoBehaviour
     [SerializeField] private Transform _productCellsParent;
     [SerializeField] private Button _closeButton;
 
-    private List<ProductUICell> _productCells;
+    private List<ProductUICell> _productCells = new List<ProductUICell>();
 
     public Recipe Recipe { get; private set; }
     public bool IsActive { get; private set; }
@@ -22,7 +22,6 @@ public class RecipeUIWindow : MonoBehaviour
 
     private void Awake()
     {
-        _productCells = new List<ProductUICell>();
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke(this));
     }
 
@@ -32,6 +31,7 @@ public class RecipeUIWindow : MonoBehaviour
             return;
 
         IsActive = value;
+        gameObject.SetActive(value);
 
         if (IsActive)
             RefreshView();

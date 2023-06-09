@@ -6,13 +6,16 @@ public abstract class AutoSingletonMono<T> : MonoBehaviour where T : AutoSinglet
 {
     public static T Instance { get; private set; }
 
-    [RuntimeInitializeOnLoadMethod]
-    private static void Initialize()
+    protected void Awake()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         if (Instance != null)
             return;
 
-        GameObject gameObject = new GameObject($"{typeof(T).Name}");
-        Instance = gameObject.AddComponent<T>();
+        Instance = (T)this;
     }
 }

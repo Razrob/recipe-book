@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class RecipeWebUploader : AutoSingletonMono<RecipeWebLoader>
+public class RecipeWebUploader : AutoSingletonMono<RecipeWebUploader>
 {
     private Coroutine _uploadCoroutine;
 
-    private void Awake()
+    private void Start()
     {
         Upload();
     }

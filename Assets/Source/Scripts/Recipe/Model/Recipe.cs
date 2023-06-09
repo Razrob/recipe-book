@@ -17,4 +17,13 @@ public class Recipe
     public string Content => _content;
     public IReadOnlyList<Product> Products => _products;
     public Sprite Icon => _icon;
+
+    public Recipe(string name, string description, string content, Sprite icon, List<Product> products)
+    {
+        _name = name;
+        _description = description;
+        _content = content;
+        _icon = icon;
+        _products = products;
+    }
 }

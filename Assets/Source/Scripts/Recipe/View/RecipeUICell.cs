@@ -22,6 +22,12 @@ public class RecipeUICell : MonoBehaviour
     {
         _nameText.text = $"{Recipe.Name}";
         _iconImage.sprite = Recipe.Icon;
-        _descriptionText.text = $"{Recipe.Description}";
+
+        string description = Recipe.Description.Length > 70 ? Recipe.Description.Substring(0, 70) : Recipe.Description;
+
+        if (Recipe.Description.Length > 70)
+            description += "...";
+
+        _descriptionText.text = $"{description}";
     }
 }
