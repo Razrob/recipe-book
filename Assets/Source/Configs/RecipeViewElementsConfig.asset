@@ -15,3 +15,4 @@ MonoBehaviour:
   _recipeUICellPrefab: {fileID: 6558581055274023699, guid: 457efddd6d4609047a6a31e8d594d140, type: 3}
   _recipeUIWindowPrefab: {fileID: 0}
   _productUICellPrefab: {fileID: 3748738209457994190, guid: ad4111c085345d249a444f7bd6676371, type: 3}
+  _createdProductUICell: {fileID: 3190604204439289478, guid: cc13ef847345f9c419d15bb2d93f15b3, type: 3}

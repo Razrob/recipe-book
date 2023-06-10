@@ -62,7 +62,7 @@ public class RecipeListArea : MonoBehaviour, IRecipeWindow
 
         int index = 0;
 
-        foreach (long id in _recipePack.Recipes.Keys)
+        foreach (int id in _recipePack.Recipes.Keys)
         {
             _recipeCellsList[index].gameObject.SetActive(index < _recipePack.Recipes.Count);
 

@@ -42,4 +42,10 @@ public class RecipeViewElementsFactory
         ProductUICell cell = GameObject.Instantiate(_config.ProductUICellPrefab);
         return cell;
     }
+
+    public CreatedProductUICell CreateCreatedProductUICell()
+    {
+        CreatedProductUICell cell = GameObject.Instantiate(_config.CreatedProductUICell);
+        return cell;
+    }
 }

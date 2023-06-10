@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public struct RecipePack
 {
-    [SerializeField] private Dictionary<long, Recipe> _recipes;
+    [SerializeField] private Dictionary<int, Recipe> _recipes;
 
-    public Dictionary<long, Recipe> Recipes => _recipes;
+    public Dictionary<int, Recipe> Recipes => _recipes;
     public bool IsEmpty => _recipes is null || _recipes.Count is 0;
 
     public static RecipePack Empty => new RecipePack();

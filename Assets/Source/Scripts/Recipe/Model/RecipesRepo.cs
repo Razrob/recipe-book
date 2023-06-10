@@ -41,6 +41,15 @@ public class RecipesRepo
         }
     }
 
+    public void ModifyUserRecipe(Recipe recipe)
+    {
+        if (_userRecipePack.Recipes.ContainsKey(recipe.ID))
+        {
+            _userRecipePack.Recipes[recipe.ID] = recipe;
+            OnUserRecipesStateChange?.Invoke();
+        }
+    }
+
     public void RemoveUserRecipe(Recipe recipe)
     {
         if (_userRecipePack.Recipes.ContainsKey(recipe.ID))
@@ -54,5 +63,10 @@ public class RecipesRepo
     public bool ContainsInUserRecipes(Recipe recipe)
     {
         return _userRecipePack.Recipes.ContainsKey(recipe.ID);
+    }
+
+    public bool ContainsInGlobalRecipes(Recipe recipe)
+    {
+        return _globalRecipePack.Recipes.ContainsKey(recipe.ID);
     }
 }

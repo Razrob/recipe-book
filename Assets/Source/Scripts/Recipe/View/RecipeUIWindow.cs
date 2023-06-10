@@ -12,6 +12,7 @@ public class RecipeUIWindow : MonoBehaviour, IRecipeWindow
     [SerializeField] private TMP_Text _contentText;
     [SerializeField] private Transform _productCellsParent;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private Button _modifyButton;
     [SerializeField] private RecipeWindowID _recipeWindowID;
 
     private List<ProductUICell> _productCells = new List<ProductUICell>();
@@ -21,11 +22,13 @@ public class RecipeUIWindow : MonoBehaviour, IRecipeWindow
     public RecipeWindowID RecipeWindowID => _recipeWindowID;
 
     public event Action<RecipeUIWindow> OnCloseButtonClicked;
+    public event Action<RecipeUIWindow> OnModifyButtonClicked;
     public event Action<IRecipeWindow> OnActiveChange;
 
     private void Awake()
     {
         _closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke(this));
+        _modifyButton.onClick.AddListener(() => OnModifyButtonClicked?.Invoke(this));
     }
 
     public void SetActive(bool value)
@@ -56,7 +59,10 @@ public class RecipeUIWindow : MonoBehaviour, IRecipeWindow
         _nameText.text = $"{Recipe.Name}";
         _iconImage.sprite = Recipe.Icon;
         _descriptionText.text = $"{Recipe.Description}";
+        _contentText.text = $"{Recipe.Content}";
         RefreshProductList();
+
+        _modifyButton.gameObject.SetActive(!GlobalModel.Data.RecipesRepo.ContainsInGlobalRecipes(Recipe));
     }
 
     private void RefreshProductList()
