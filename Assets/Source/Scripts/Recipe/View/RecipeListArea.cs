@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RecipeListArea : MonoBehaviour
+public class RecipeListArea : MonoBehaviour, IRecipeWindow
 {
     [SerializeField] private Transform _recipeCellsParent;
+    [SerializeField] private RecipeWindowID _recipeWindowID;
 
     private RecipePack _recipePack;
-    private List<RecipeUICell> _recipeCellsList;
+    private List<RecipeUICell> _recipeCellsList = new List<RecipeUICell>();
 
+    public RecipeWindowID RecipeWindowID => _recipeWindowID;
     public bool IsActive { get; private set; }
 
     public event Action<RecipeUICell> OnRecipeCellClick;
+    public event Action<RecipeUICell> OnChangeUserRecipesButtonClick;
+    public event Action<IRecipeWindow> OnActiveChange;
 
     private void Awake()
     {
-        _recipeCellsList = new List<RecipeUICell>();
+        gameObject.SetActive(IsActive);
     }
 
     public void SetActive(bool value)
@@ -28,6 +32,8 @@ public class RecipeListArea : MonoBehaviour
 
         if (IsActive)
             RefreshCells();
+
+        OnActiveChange?.Invoke(this);
     }
 
     public void SetRecipePack(RecipePack recipePack)
@@ -38,27 +44,35 @@ public class RecipeListArea : MonoBehaviour
 
     public void RefreshCells()
     {
-        if (_recipePack.IsEmpty)
-            return;
-
         int startCellsCount = _recipeCellsList.Count;
 
         for (int i = 0; i < _recipePack.Recipes.Count - startCellsCount; i++)
         {
             RecipeUICell recipeCell = RecipeViewElementsFactory.Instance.CreateRecipeUICell();
             recipeCell.transform.SetParent(_recipeCellsParent);
+
             recipeCell.OpenButton.onClick.AddListener(() => OnRecipeCellClick?.Invoke(recipeCell));
+            recipeCell.ChangeUserReceptsButton.onClick.AddListener(() => OnChangeUserRecipesButtonClick?.Invoke(recipeCell));
+
             _recipeCellsList.Add(recipeCell);
         }
 
-        for (int i = 0; i < _recipeCellsList.Count; i++)
+        foreach (RecipeUICell recipeCell in _recipeCellsList)
+            recipeCell.gameObject.SetActive(false);
+
+        int index = 0;
+
+        foreach (long id in _recipePack.Recipes.Keys)
         {
-            _recipeCellsList[i].gameObject.SetActive(i < _recipePack.Recipes.Count);
+            _recipeCellsList[index].gameObject.SetActive(index < _recipePack.Recipes.Count);
 
-            if (!_recipeCellsList[i].gameObject.activeSelf)
-                continue;
+            if (!_recipeCellsList[index].gameObject.activeSelf)
+                break;
 
-            _recipeCellsList[i].SetRecipe(_recipePack.Recipes[i]);
+            _recipeCellsList[index].SetRecipe(_recipePack.Recipes[id]);
+            _recipeCellsList[index].SetContainsInUserRecipes(GlobalModel.Data.RecipesRepo.ContainsInUserRecipes(_recipePack.Recipes[id]));
+
+            index++;
         }
     }
 }

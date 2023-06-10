@@ -24,6 +24,6 @@ public class RecipeWebUploader : AutoSingletonMono<RecipeWebUploader>
             yield return null;
 
         ///uploading
-        RecipePack pack = GlobalModel.Data.RecipesRepo.RecipePack;
+        RecipePack pack = GlobalModel.Data.RecipesRepo.UserRecipePack;
     }
 }

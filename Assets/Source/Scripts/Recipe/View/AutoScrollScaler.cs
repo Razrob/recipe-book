@@ -13,7 +13,6 @@ public class AutoScrollScaler : MonoBehaviour
     [SerializeField] private float _minHeigth;
     [SerializeField] private float _additionalHeigth;
     [SerializeField] private bool _updateEditor;
-    [SerializeField] private bool _updateCopyRectPositionY;
 
     private void OnValidate()
     {
@@ -43,9 +42,6 @@ public class AutoScrollScaler : MonoBehaviour
         else
         {
             commonContentHeight = _copyRect.sizeDelta.y;
-
-            if (_updateCopyRectPositionY)
-                _copyRect.localPosition = _copyRect.localPosition.SetY(_copyRect.sizeDelta.y * -0.5f);
         }
 
         commonContentHeight += _additionalHeigth;

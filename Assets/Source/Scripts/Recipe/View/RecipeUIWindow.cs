@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RecipeUIWindow : MonoBehaviour
+public class RecipeUIWindow : MonoBehaviour, IRecipeWindow
 {
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private Image _iconImage;
@@ -12,13 +12,16 @@ public class RecipeUIWindow : MonoBehaviour
     [SerializeField] private TMP_Text _contentText;
     [SerializeField] private Transform _productCellsParent;
     [SerializeField] private Button _closeButton;
+    [SerializeField] private RecipeWindowID _recipeWindowID;
 
     private List<ProductUICell> _productCells = new List<ProductUICell>();
 
     public Recipe Recipe { get; private set; }
     public bool IsActive { get; private set; }
+    public RecipeWindowID RecipeWindowID => _recipeWindowID;
 
     public event Action<RecipeUIWindow> OnCloseButtonClicked;
+    public event Action<IRecipeWindow> OnActiveChange;
 
     private void Awake()
     {
@@ -35,6 +38,8 @@ public class RecipeUIWindow : MonoBehaviour
 
         if (IsActive)
             RefreshView();
+
+        OnActiveChange?.Invoke(this);
     }
 
     public void SetRecipe(Recipe recipe)
