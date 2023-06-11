@@ -11,17 +11,26 @@ public class LocalSaver : MonoBehaviour
 
     private void Start()
     {
+        if (!_enabled)
+            return;
+
         Load();
         GlobalModel.Data.RecipesRepo.OnUserRecipesStateChange += Save;
     }
 
     private void OnApplicationFocus(bool focus)
     {
+        if (!_enabled)
+            return;
+
         Save();
     }
 
     private void Load()
     {
+        if (!GlobalModel.DataLoaded || !_loaded)
+            return;
+
         _loaded = true;
 
         if (!PlayerPrefs.HasKey(USER_RECIPES_LOCAL_SAVE_KEY))
