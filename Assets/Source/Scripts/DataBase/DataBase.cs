@@ -4,17 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-
 public class DataBase : MonoBehaviour
 {
+    [SerializeField] private bool _enabled;
+
     private string _dataBaseIp = "https://g118940.hostru13.fornex.host/db/";
 
     private Dictionary<ServerOperationType, string> _operationStringIp;
 
     public event Action<ServerOperationResult> AnswerResult;
 
-    void Start()
+    private void Start()
     {
+        if (!_enabled)
+            return;
+
         _operationStringIp = new Dictionary<ServerOperationType, string>();
         _operationStringIp.Add(ServerOperationType.Registration, "register_user.php");
         _operationStringIp.Add(ServerOperationType.CheckUserPassword, "check_user_pass.php");

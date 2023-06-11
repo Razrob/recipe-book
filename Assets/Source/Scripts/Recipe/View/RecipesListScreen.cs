@@ -10,6 +10,8 @@ public class RecipesListScreen : UIScreen
     [SerializeField] private RecipeCreateUIWindow _recipeCreateUIWindow;
     [SerializeField] private RecipeCreateUIWindow _recipeModifyUIWindow;
     [SerializeField] private NavigationPanel _navigationPanel;
+    [SerializeField] private LoginUIWindow _loginUIWindow;
+    [SerializeField] private RegisterUIWindow _registerUIWindow;
 
     private List<IRecipeWindow> _recipeWindows;
 
@@ -19,6 +21,8 @@ public class RecipesListScreen : UIScreen
     public RecipeCreateUIWindow RecipeCreateUIWindow => _recipeCreateUIWindow;
     public RecipeCreateUIWindow RecipeModifyUIWindow => _recipeModifyUIWindow;
     public NavigationPanel NavigationPanel => _navigationPanel;
+    public LoginUIWindow LoginUIWindow => _loginUIWindow;
+    public RegisterUIWindow RegisterUIWindow => _registerUIWindow;
 
     private void Awake()
     {

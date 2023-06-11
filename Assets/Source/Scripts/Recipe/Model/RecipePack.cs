@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 [Serializable]
 public struct RecipePack
 {
-    [SerializeField] private Dictionary<int, Recipe> _recipes;
+    [SerializeField] [JsonProperty] private Dictionary<int, Recipe> _recipes;
 
     public Dictionary<int, Recipe> Recipes => _recipes;
     public bool IsEmpty => _recipes is null || _recipes.Count is 0;
@@ -15,6 +16,6 @@ public struct RecipePack
 
     public RecipePack(IEnumerable<Recipe> recipes)
     {
-        _recipes = recipes.ToDictionary(r => r.ID, r => r);
+        _recipes = new Dictionary<int, Recipe>(recipes.ToDictionary(r => r.ID, r => r));
     }
 }

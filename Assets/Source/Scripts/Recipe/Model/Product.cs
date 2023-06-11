@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using UnityEngine;
 
 [Serializable]
 public class Product
 {
-    [SerializeField] private string _name;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private string _mass;
+    [SerializeField][JsonProperty] private string _name;
+   /* [SerializeField] */private Sprite _icon;
+    [SerializeField][JsonProperty] private string _mass;
 
     public Product(string name, Sprite icon, string mass)
     {

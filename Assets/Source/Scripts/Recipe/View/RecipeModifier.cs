@@ -1,4 +1,6 @@
-﻿public class RecipeModifier : AutoSingletonMono<RecipeModifier>
+﻿using System.Diagnostics;
+
+public class RecipeModifier : AutoSingletonMono<RecipeModifier>
 {
     private RecipesListScreen _recipesListScreen;
 

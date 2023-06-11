@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,12 +7,12 @@ using UnityEngine;
 [Serializable]
 public class Recipe
 {
-    [SerializeField] private int _id;
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
-    [SerializeField] private string _content;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private List<Product> _products;
+    [SerializeField][JsonProperty] private int _id;
+    [SerializeField][JsonProperty] private string _name;
+    [SerializeField][JsonProperty] private string _description;
+    [SerializeField][JsonProperty] private string _content;
+    /*[SerializeField] */private Sprite _icon;
+    [SerializeField][JsonProperty] private List<Product> _products;
 
     public int ID => _id;
     public string Name => _name;

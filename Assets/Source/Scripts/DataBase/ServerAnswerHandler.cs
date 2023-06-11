@@ -10,8 +10,6 @@ public class ServerAnswerHandler : MonoBehaviour
     public event Action<bool> CheckUserPasswordCallback;
     public event Action<Recipe[]> GetRecipes;
 
-
-
     private void Awake()
     {
         _dataBase.AnswerResult += OnAnswerResult;

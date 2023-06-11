@@ -359,7 +359,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 1616.7417}
+  m_SizeDelta: {x: 0, y: 1469.5117}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3496384942768672386
 MonoBehaviour:
@@ -1469,7 +1469,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1020, y: 777}
+  m_SizeDelta: {x: 1020, y: 629.86}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5746086359443385690
 CanvasRenderer:
@@ -2058,7 +2058,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -100, y: 777}
+  m_SizeDelta: {x: -100, y: 629.89}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5746086359851633003
 CanvasRenderer:
@@ -2128,7 +2128,7 @@ MonoBehaviour:
   _scaleX: 0
   _scaleY: 1
   _minScaleX: 0
-  _minScaleY: 777
+  _minScaleY: 629.89
 --- !u!1 &5746086360025414595
 GameObject:
   m_ObjectHideFlags: 0
