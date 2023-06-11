@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a25e69ae382fbd24086dab44aa1b3efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enabled: 0
+  _enabled: 1
   _dataBase: {fileID: 2119921149}
   _serverAnswerHandler: {fileID: 854963955}
 --- !u!224 &520028540 stripped
