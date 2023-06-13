@@ -38,10 +38,10 @@ public class Recipe
     public Recipe(RecipeServer recipeServer)
     {
         _id = recipeServer.id;
-        _name = recipeServer.name;
-        _description = recipeServer.description;
-        _content = recipeServer.content;
-        _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products);
-        _authorLogin = recipeServer.owner;
+        _name = recipeServer.name ?? "";
+        _description = recipeServer.description ?? "";
+        _content = recipeServer.content ?? "";
+        _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products ?? "");
+        _authorLogin = recipeServer.owner ?? "";
     }
 }
