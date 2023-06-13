@@ -8,6 +8,7 @@ public class RecipeServer
     public string description;
     public string content;
     public string products;
+    public string owner;
 }
 
 

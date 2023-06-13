@@ -41,5 +41,6 @@ public class Recipe
         _description = recipeServer.description;
         _content = recipeServer.content;
         _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products);
+        _authorLogin = recipeServer.owner;
     }
 }
