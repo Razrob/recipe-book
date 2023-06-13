@@ -13,16 +13,16 @@ public class Recipe
     [SerializeField] [JsonProperty] private string _content;
     [SerializeField] [JsonProperty] private string _authorLogin;
     /*[SerializeField] */
-    private Sprite _icon;
+    [JsonIgnore] private Sprite _icon;
     [SerializeField] [JsonProperty] private List<Product> _products;
 
-    public int ID => _id;
-    public string Name => _name;
-    public string Description => _description;
-    public string Content => _content;
-    public IReadOnlyList<Product> Products => _products;
-    public Sprite Icon => _icon;
-    public string AuthorLogin => _authorLogin;
+    [JsonIgnore] public int ID => _id;
+    [JsonIgnore] public string Name => _name;
+    [JsonIgnore] public string Description => _description;
+    [JsonIgnore] public string Content => _content;
+    [JsonIgnore] public IReadOnlyList<Product> Products => _products;
+    [JsonIgnore] public Sprite Icon => _icon;
+    [JsonIgnore] public string AuthorLogin => _authorLogin;
 
     public Recipe(int id, string name, string description, string content, Sprite icon, List<Product> products, string authorLogin)
     {
@@ -41,7 +41,8 @@ public class Recipe
         _name = recipeServer.name ?? "";
         _description = recipeServer.description ?? "";
         _content = recipeServer.content ?? "";
-        _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products ?? "");
+        Debug.Log(recipeServer.products);
+        _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products ?? "") ?? new List<Product>();
         _authorLogin = recipeServer.owner ?? "";
     }
 }

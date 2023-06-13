@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RecipeWebLoader : AutoSingletonMono<RecipeWebLoader>
@@ -15,7 +16,7 @@ public class RecipeWebLoader : AutoSingletonMono<RecipeWebLoader>
         _serverAnswerHandler = FindObjectOfType<ServerAnswerHandler>(true);
 
         _serverAnswerHandler.GetRecipes += OnGetRecipes;
-        _serverAnswerHandler.GetUserRecipes += OnGetUserRecipes;
+        //_serverAnswerHandler.GetUserRecipes += OnGetUserRecipes;
 
         GlobalModel.Data.RecipesRepo.OnUserReceptAdd += OnUserRecipeAdd;
         GlobalModel.Data.RecipesRepo.OnUserReceptRemove += OnUserRecipeRemove;
@@ -41,13 +42,17 @@ public class RecipeWebLoader : AutoSingletonMono<RecipeWebLoader>
 
     private void OnGetRecipes(Recipe[] recipes)
     {
-        GlobalModel.Data.RecipesRepo.SetGlobalRecipes(recipes);
+        Recipe[] userRecipes = recipes.Where(r => r.AuthorLogin == GlobalModel.Data.UserAuthorizationData.UserName).ToArray();
+        Recipe[] globalRecipes = recipes.Where(r => r.AuthorLogin != GlobalModel.Data.UserAuthorizationData.UserName).ToArray();
+
+        GlobalModel.Data.RecipesRepo.SetUserRecipes(userRecipes);
+        GlobalModel.Data.RecipesRepo.SetGlobalRecipes(globalRecipes);
     }
 
-    private void OnGetUserRecipes(Recipe[] recipes)
-    {
-        GlobalModel.Data.RecipesRepo.SetUserRecipes(recipes);
-    }
+    //private void OnGetUserRecipes(Recipe[] recipes)
+    //{
+    //    GlobalModel.Data.RecipesRepo.SetUserRecipes(recipes);
+    //}
 
     public void Upload()
     {
@@ -62,12 +67,11 @@ public class RecipeWebLoader : AutoSingletonMono<RecipeWebLoader>
         while (!GlobalModel.DataLoaded)
             yield return null;
 
-        _dataBase.GetRecipes();
-
         while (string.IsNullOrEmpty(GlobalModel.Data.UserAuthorizationData.UserName))
             yield return null;
 
-        _dataBase.GetUserRecipes(GlobalModel.Data.UserAuthorizationData.UserName);
+        _dataBase.GetRecipes();
+        //_dataBase.GetUserRecipes(GlobalModel.Data.UserAuthorizationData.UserName);
 
         ///loading
 

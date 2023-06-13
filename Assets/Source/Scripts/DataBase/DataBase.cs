@@ -68,6 +68,7 @@ public class DataBase : MonoBehaviour
         recipeServer.description = recipe.Description;
         recipeServer.name = recipe.Name;
         recipeServer.products = JsonConvert.SerializeObject(recipe.Products);
+        recipeServer.owner = recipe.AuthorLogin;
 
         form.AddField("Login", login);
         form.AddField("RecipeName", nameRecipe);
@@ -107,6 +108,7 @@ public class DataBase : MonoBehaviour
         recipeServer.description = recipe.Description;
         recipeServer.content = recipe.Content;
         recipeServer.products = JsonConvert.SerializeObject(recipe.Products);
+        recipeServer.owner = recipe.AuthorLogin;
 
         string jsonRecipeServer = JsonConvert.SerializeObject(recipeServer);
 

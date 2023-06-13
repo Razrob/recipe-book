@@ -6,7 +6,8 @@ using UnityEngine;
 public class Product
 {
     [SerializeField][JsonProperty] private string _name;
-   /* [SerializeField] */private Sprite _icon;
+    /* [SerializeField] */
+    [JsonIgnore] private Sprite _icon;
     [SerializeField][JsonProperty] private string _mass;
 
     public Product(string name, Sprite icon, string mass)
@@ -16,7 +17,7 @@ public class Product
         _mass = mass;
     }
 
-    public string Name => _name;
-    public Sprite Icon => _icon;
-    public string Mass => _mass;
+    [JsonIgnore] public string Name => _name;
+    [JsonIgnore] public Sprite Icon => _icon;
+    [JsonIgnore] public string Mass => _mass;
 }
