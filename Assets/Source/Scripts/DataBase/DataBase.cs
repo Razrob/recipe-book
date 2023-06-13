@@ -30,15 +30,16 @@ public class DataBase : MonoBehaviour
         _operationStringIp.Add(ServerOperationType.GetUserRecipes, "get_user_recipes.php");
         _operationStringIp.Add(ServerOperationType.AddUserRecipe, "add_user_recipe.php");
         _operationStringIp.Add(ServerOperationType.AddRecipe, "add_recipe.php");
-
-        AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
-        _serverAnswerHandler.GetUserRecipes += OnHandle;
-
+        /*
+                AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
+                _serverAnswerHandler.GetUserRecipes += OnHandle;*/
+        CheckUserPassword("sdlfjsk","fkdjf");
 
     }
 
     private void OnHandle(Recipe[] f)
     {
+        _serverAnswerHandler.GetUserRecipes -= OnHandle;
         for (int i=0;i<f.Length;i++)
         {
             Debug.Log(f[i]);
