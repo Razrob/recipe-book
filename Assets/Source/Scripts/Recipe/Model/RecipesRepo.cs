@@ -17,6 +17,7 @@ public class RecipesRepo
 
     public event Action<Recipe> OnUserReceptAdd;
     public event Action<Recipe> OnUserReceptRemove;
+    public event Action<Recipe> OnUserRecipeModify;
     public event Action OnUserRecipesStateChange;
 
     public void SetUserRecipes(IEnumerable<Recipe> recipes)
@@ -46,6 +47,7 @@ public class RecipesRepo
         if (_userRecipePack.Recipes.ContainsKey(recipe.ID))
         {
             _userRecipePack.Recipes[recipe.ID] = recipe;
+            OnUserRecipeModify?.Invoke(recipe);
             OnUserRecipesStateChange?.Invoke();
         }
     }

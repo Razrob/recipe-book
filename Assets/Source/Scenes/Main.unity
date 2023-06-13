@@ -1538,6 +1538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enabled: 1
+  _serverAnswerHandler: {fileID: 854963955}
 --- !u!224 &2432494657571772093 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5478985378918793099, guid: 92800619b8e52424090ef9cc8d2aa98a, type: 3}

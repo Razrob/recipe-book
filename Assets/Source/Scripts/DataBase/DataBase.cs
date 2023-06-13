@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[DefaultExecutionOrder(-1000)]
 public class DataBase : MonoBehaviour
 {
     [SerializeField] private bool _enabled;
@@ -31,7 +32,7 @@ public class DataBase : MonoBehaviour
         _operationStringIp.Add(ServerOperationType.AddUserRecipe, "add_user_recipe.php");
         _operationStringIp.Add(ServerOperationType.AddRecipe, "add_recipe.php");
 
-        AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
+        //AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
         _serverAnswerHandler.GetUserRecipes += OnHandle;
 
 

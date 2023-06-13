@@ -8,6 +8,7 @@ public class UserAuthorizator : MonoBehaviour
     [SerializeField] private ServerAnswerHandler _serverAnswerHandler;
 
     private RecipesListScreen _recipesListScreen;
+    private string _userLogin;
 
     private void Awake()
     {
@@ -58,6 +59,7 @@ public class UserAuthorizator : MonoBehaviour
 
     private void OnLoginScreenLoginButtonClick()
     {
+        _userLogin = _recipesListScreen.LoginUIWindow.LoginField.text;
         _dataBase.CheckUserPassword(
             _recipesListScreen.LoginUIWindow.LoginField.text,
             _recipesListScreen.LoginUIWindow.PasswordField.text);
@@ -71,6 +73,7 @@ public class UserAuthorizator : MonoBehaviour
             return;
         }
 
+        _userLogin = _recipesListScreen.RegisterUIWindow.LoginField.text;
         _dataBase.UserRegistration(
             _recipesListScreen.RegisterUIWindow.LoginField.text, 
             _recipesListScreen.RegisterUIWindow.PasswordField.text);
@@ -78,6 +81,7 @@ public class UserAuthorizator : MonoBehaviour
 
     private void SuccessLogin()
     {
+        GlobalModel.Data.UserAuthorizationData.SetUserName(_userLogin);
         _recipesListScreen.LoginUIWindow.SetActive(false);
         _recipesListScreen.RegisterUIWindow.SetActive(false);
     }
