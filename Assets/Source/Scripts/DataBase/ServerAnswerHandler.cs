@@ -8,6 +8,10 @@ public class ServerAnswerHandler : MonoBehaviour
 
     public event Action<TextCallbackWithSuccessIndicator> RegistrationCallback;
     public event Action<bool> CheckUserPasswordCallback;
+
+    public event Action<bool> DeleteUserRecipe;
+    public event Action<bool> ChangeUserRecipe;
+
     public event Action<Recipe[]> GetRecipes;
     public event Action<Recipe[]> GetUserRecipes;
     public event Action<IntCallbackWithSuccessIndicator> AddedRecipe;
@@ -73,6 +77,28 @@ public class ServerAnswerHandler : MonoBehaviour
 
             case ServerOperationType.AddUserRecipe:
                 AddedUserRecipe?.Invoke(new IntCallbackWithSuccessIndicator(true, int.Parse(serverOperationResult.Result.Text)));
+                break;
+
+            case ServerOperationType.DeleteUserRecipe:
+                if (serverOperationResult.Result.Text == "true")
+                {
+                    DeleteUserRecipe?.Invoke(true);
+                }
+                else
+                {
+                    DeleteUserRecipe?.Invoke(false);
+                }
+                break;
+
+            case ServerOperationType.ChangeUserRecipe:
+                if (serverOperationResult.Result.Text == "true")
+                {
+                    ChangeUserRecipe?.Invoke(true);
+                }
+                else
+                {
+                    ChangeUserRecipe?.Invoke(false);
+                }
                 break;
         }
     }

@@ -6,4 +6,6 @@
     AddUserRecipe,
     GetUserRecipes,
     AddRecipe,
+    DeleteUserRecipe,
+    ChangeUserRecipe,
 }

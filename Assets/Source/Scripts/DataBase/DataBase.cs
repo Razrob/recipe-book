@@ -21,8 +21,7 @@ public class DataBase : MonoBehaviour
 
     private void Start()
     {
-        if (!_enabled)
-            return;
+       
 
         _operationStringIp = new Dictionary<ServerOperationType, string>();
         _operationStringIp.Add(ServerOperationType.Registration, "register_user.php");
@@ -31,12 +30,17 @@ public class DataBase : MonoBehaviour
         _operationStringIp.Add(ServerOperationType.GetUserRecipes, "get_user_recipes.php");
         _operationStringIp.Add(ServerOperationType.AddUserRecipe, "add_user_recipe.php");
         _operationStringIp.Add(ServerOperationType.AddRecipe, "add_recipe.php");
+        _operationStringIp.Add(ServerOperationType.DeleteUserRecipe, "delete_user_recipe.php");
+        _operationStringIp.Add(ServerOperationType.ChangeUserRecipe, "change_user_recipe.php");
 
+        if (!_enabled)
+            return;
+          
+      //  AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
 
-        GetUserRecipes("andrey");
+        ChangeUserRepice("andrey", "fdlks", new Recipe(12, "fdlks", "12", "44", null, null));
 
-       // AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
-       // _serverAnswerHandler.GetUserRecipes += OnHandle;
+        // _serverAnswerHandler.GetUserRecipes += OnHandle;
 
 
     }
@@ -48,6 +52,46 @@ public class DataBase : MonoBehaviour
             Debug.Log(f[i]);
         }    
     }
+
+    public void ChangeUserRepice(string login, string nameRecipe, Recipe recipe)
+    {
+        WWWForm form = new WWWForm();
+
+        RecipeServer recipeServer = new RecipeServer();
+
+        recipeServer.id = recipe.ID;
+        recipeServer.content = recipe.Content;
+        recipeServer.description = recipe.Description;
+        recipeServer.name = recipe.Name;
+
+        form.AddField("Login", login);
+        form.AddField("RecipeName", nameRecipe);
+        form.AddField("RecipeJson", JsonConvert.SerializeObject(recipeServer));
+
+        StartCoroutine(GetServerAnswer(form, data =>
+        {
+            AnswerResult?.Invoke(new ServerOperationResult(ServerOperationType.ChangeUserRecipe, data));
+            Debug.Log(data.Text);
+            Debug.Log(data.Type);
+        }, ServerOperationType.ChangeUserRecipe));
+    }
+
+
+    public void DeleteUserRepice(string login, string nameRecipe)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("Login", login);
+        form.AddField("RecipeName", nameRecipe);
+
+        StartCoroutine(GetServerAnswer(form, data =>
+        {
+            AnswerResult?.Invoke(new ServerOperationResult(ServerOperationType.DeleteUserRecipe, data));
+            Debug.Log(data.Text);
+            Debug.Log(data.Type);
+        }, ServerOperationType.DeleteUserRecipe));
+    }
+
+
 
     private void AddRecipe(string login, Recipe recipe)
     {
