@@ -116,7 +116,8 @@ public class RecipeCreateUIWindow : MonoBehaviour, IRecipeWindow
             description: _descriptionText.text,
             content: _contentText.text,
             icon: null,
-            products: products);
+            products: products,
+            authorLogin: GlobalModel.Data.UserAuthorizationData.UserName);
 
         return recipe;
     }

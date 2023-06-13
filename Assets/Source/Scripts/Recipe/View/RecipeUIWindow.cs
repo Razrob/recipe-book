@@ -62,7 +62,7 @@ public class RecipeUIWindow : MonoBehaviour, IRecipeWindow
         _contentText.text = $"{Recipe.Content}";
         RefreshProductList();
 
-        _modifyButton.gameObject.SetActive(!GlobalModel.Data.RecipesRepo.ContainsInGlobalRecipes(Recipe));
+        _modifyButton.gameObject.SetActive(Recipe.AuthorLogin == GlobalModel.Data.UserAuthorizationData.UserName);
     }
 
     private void RefreshProductList()

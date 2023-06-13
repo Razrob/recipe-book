@@ -22,6 +22,7 @@ public class Recipe
     public string Content => _content;
     public IReadOnlyList<Product> Products => _products;
     public Sprite Icon => _icon;
+    public string AuthorLogin => _authorLogin;
 
     public Recipe(int id, string name, string description, string content, Sprite icon, List<Product> products, string authorLogin)
     {
