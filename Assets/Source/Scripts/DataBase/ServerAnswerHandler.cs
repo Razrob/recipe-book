@@ -9,6 +9,9 @@ public class ServerAnswerHandler : MonoBehaviour
     public event Action<TextCallbackWithSuccessIndicator> RegistrationCallback;
     public event Action<bool> CheckUserPasswordCallback;
     public event Action<Recipe[]> GetRecipes;
+    public event Action<Recipe[]> GetUserRecipes;
+    public event Action<IntCallbackWithSuccessIndicator> AddedRecipe;
+    public event Action<IntCallbackWithSuccessIndicator> AddedUserRecipe;
 
     private void Awake()
     {
@@ -35,13 +38,39 @@ public class ServerAnswerHandler : MonoBehaviour
                     CheckUserPasswordCallback?.Invoke(false);
                     break;
                 }
-                throw new Exception("Incorrect answer server:"+ serverOperationResult.Result.Text);
+                CheckUserPasswordCallback?.Invoke(false);
+                break;
 
             case ServerOperationType.GetRecipes:
+                {
+                    RecipeServer[] serverRecipes = JsonConvert.DeserializeObject<RecipeServer[]>(serverOperationResult.Result.Text);
+                    Recipe[] recipes = new Recipe[serverRecipes.Length];
+                    for (int i =0; i< serverRecipes.Length; i++)
+                    {
+                        recipes[i] = new Recipe(serverRecipes[i]);
+                    }
+                    GetRecipes?.Invoke(recipes);
+                    break;
+                }
 
-                RecipeServer[] recipes = JsonConvert.DeserializeObject<RecipeServer[]>(serverOperationResult.Result.Text);
-                Debug.Log(JsonConvert.SerializeObject(recipes[0]));
+            case ServerOperationType.GetUserRecipes:
+                {
+                    RecipeServer[] serverRecipes = JsonConvert.DeserializeObject<RecipeServer[]>(serverOperationResult.Result.Text);
+                    Recipe[] recipes = new Recipe[serverRecipes.Length];
+                    for (int i = 0; i < serverRecipes.Length; i++)
+                    {
+                        recipes[i] = new Recipe(serverRecipes[i]);
+                    }
+                    GetUserRecipes?.Invoke(recipes);
+                    break;
+                }
 
+            case ServerOperationType.AddRecipe:
+                AddedRecipe?.Invoke(new IntCallbackWithSuccessIndicator(true,int.Parse(serverOperationResult.Result.Text)));
+                break;
+
+            case ServerOperationType.AddUserRecipe:
+                AddedUserRecipe?.Invoke(new IntCallbackWithSuccessIndicator(true, int.Parse(serverOperationResult.Result.Text)));
                 break;
         }
     }

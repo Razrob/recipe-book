@@ -3,4 +3,7 @@
     Registration,
     CheckUserPassword,
     GetRecipes,
+    AddUserRecipe,
+    GetUserRecipes,
+    AddRecipe,
 }
