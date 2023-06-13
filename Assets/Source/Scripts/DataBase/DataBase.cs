@@ -35,12 +35,16 @@ public class DataBase : MonoBehaviour
 
         if (!_enabled)
             return;
-          
-      //  AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
 
-        ChangeUserRepice("andrey", "fdlks", new Recipe(12, "fdlks", "12", "44", null, null));
+        //  AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
 
-        // _serverAnswerHandler.GetUserRecipes += OnHandle;
+        //  ChangeUserRepice("andrey", "fdlks", new Recipe(12, "fdlks", "12", "44", null, null));
+
+        //GetUserRecipes("Fedor555");
+
+       // GetRecipes();
+        
+       //  _serverAnswerHandler.GetUserRecipes += OnHandle;
 
 
     }
@@ -63,6 +67,7 @@ public class DataBase : MonoBehaviour
         recipeServer.content = recipe.Content;
         recipeServer.description = recipe.Description;
         recipeServer.name = recipe.Name;
+        recipeServer.products = JsonConvert.SerializeObject(recipe.Products);
 
         form.AddField("Login", login);
         form.AddField("RecipeName", nameRecipe);
@@ -101,6 +106,7 @@ public class DataBase : MonoBehaviour
         recipeServer.name = recipe.Name;
         recipeServer.description = recipe.Description;
         recipeServer.content = recipe.Content;
+        recipeServer.products = JsonConvert.SerializeObject(recipe.Products);
 
         string jsonRecipeServer = JsonConvert.SerializeObject(recipeServer);
 

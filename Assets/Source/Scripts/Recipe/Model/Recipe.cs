@@ -38,5 +38,6 @@ public class Recipe
         _name = recipeServer.name;
         _description = recipeServer.description;
         _content = recipeServer.content;
+        _products = JsonConvert.DeserializeObject<List<Product>>(recipeServer.products);
     }
 }
