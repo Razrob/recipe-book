@@ -31,12 +31,12 @@ public class RecipeWebLoader : AutoSingletonMono<RecipeWebLoader>
 
     private void OnUserRecipeRemove(Recipe recipe)
     {
-        //_dataBase.(GlobalModel.Data.UserAuthorizationData.UserName, recipe);
+        _dataBase.DeleteUserRepice(GlobalModel.Data.UserAuthorizationData.UserName, recipe.Name);
     }
 
     private void OnUserRecipeModified(Recipe recipe)
     {
-
+        _dataBase.ChangeUserRepice(GlobalModel.Data.UserAuthorizationData.UserName, recipe.Name, recipe);
     }
 
     private void OnGetRecipes(Recipe[] recipes)

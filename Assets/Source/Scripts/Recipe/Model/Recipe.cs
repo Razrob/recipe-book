@@ -11,6 +11,7 @@ public class Recipe
     [SerializeField] [JsonProperty] private string _name;
     [SerializeField] [JsonProperty] private string _description;
     [SerializeField] [JsonProperty] private string _content;
+    [SerializeField] [JsonProperty] private string _authorLogin;
     /*[SerializeField] */
     private Sprite _icon;
     [SerializeField] [JsonProperty] private List<Product> _products;
@@ -22,7 +23,7 @@ public class Recipe
     public IReadOnlyList<Product> Products => _products;
     public Sprite Icon => _icon;
 
-    public Recipe(int id, string name, string description, string content, Sprite icon, List<Product> products)
+    public Recipe(int id, string name, string description, string content, Sprite icon, List<Product> products, string authorLogin)
     {
         _id = id;
         _name = name;
@@ -30,6 +31,7 @@ public class Recipe
         _content = content;
         _icon = icon;
         _products = products;
+        _authorLogin = authorLogin;
     }
 
     public Recipe(RecipeServer recipeServer)
