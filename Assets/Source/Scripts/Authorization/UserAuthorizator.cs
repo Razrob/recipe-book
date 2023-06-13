@@ -39,6 +39,7 @@ public class UserAuthorizator : MonoBehaviour
 
     private void RegistrationCallback(TextCallbackWithSuccessIndicator textCallback)
     {
+        Debug.Log(textCallback.Text);
         if (!textCallback.Text.Contains("уже есть"))
             SuccessLogin();
         else

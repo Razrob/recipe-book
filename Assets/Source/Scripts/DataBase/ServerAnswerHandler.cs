@@ -43,6 +43,7 @@ public class ServerAnswerHandler : MonoBehaviour
 
             case ServerOperationType.GetRecipes:
                 {
+                    Debug.Log(serverOperationResult.Result.Text);
                     RecipeServer[] serverRecipes = JsonConvert.DeserializeObject<RecipeServer[]>(serverOperationResult.Result.Text);
                     Recipe[] recipes = new Recipe[serverRecipes.Length];
                     for (int i =0; i< serverRecipes.Length; i++)
@@ -55,6 +56,7 @@ public class ServerAnswerHandler : MonoBehaviour
 
             case ServerOperationType.GetUserRecipes:
                 {
+                    Debug.Log(serverOperationResult.Result.Text);
                     RecipeServer[] serverRecipes = JsonConvert.DeserializeObject<RecipeServer[]>(serverOperationResult.Result.Text);
                     Recipe[] recipes = new Recipe[serverRecipes.Length];
                     for (int i = 0; i < serverRecipes.Length; i++)

@@ -32,8 +32,11 @@ public class DataBase : MonoBehaviour
         _operationStringIp.Add(ServerOperationType.AddUserRecipe, "add_user_recipe.php");
         _operationStringIp.Add(ServerOperationType.AddRecipe, "add_recipe.php");
 
-        //AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
-        _serverAnswerHandler.GetUserRecipes += OnHandle;
+
+        GetUserRecipes("andrey");
+
+       // AddUserRecipe("andrey",new Recipe(12,"fdlks","fdkfs","fdjkfs",null,null));
+       // _serverAnswerHandler.GetUserRecipes += OnHandle;
 
 
     }
@@ -130,8 +133,8 @@ public class DataBase : MonoBehaviour
         StartCoroutine(GetServerAnswer(form, data =>
         {
             AnswerResult?.Invoke(new ServerOperationResult(ServerOperationType.GetRecipes, data));
-            Debug.Log(data.Text);
-            Debug.Log(data.Type);
+          //  Debug.Log(data.Text);
+        //    Debug.Log(data.Type);
         }, ServerOperationType.GetRecipes));
     }
 
